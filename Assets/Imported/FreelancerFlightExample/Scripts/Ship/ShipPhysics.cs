@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-namespace FLFlight
-{
     /// <summary>
     /// Applies linear and angular forces to a ship.
     /// This is based on the ship physics from https://github.com/brihernandez/UnityCommon/blob/master/Assets/ShipPhysics/ShipPhysics.cs
@@ -77,4 +75,3 @@ namespace FLFlight
         //    return ret;
         //}
     }
-}

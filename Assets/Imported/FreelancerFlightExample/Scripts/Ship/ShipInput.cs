@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace FLFlight
-{
+
     /// <summary>
     /// Class specifically to deal with input.
     /// </summary>
@@ -159,5 +158,4 @@ namespace FLFlight
             GameController.instance.GameOver();
         }
     }
-}
 

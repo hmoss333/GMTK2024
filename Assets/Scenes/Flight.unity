@@ -298,13 +298,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05350984cfdb9440bac8d80b55101277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 901869350}
   celestialPrefab: {fileID: 5675092262919765063, guid: 65239a34498454309aba4454706a2022, type: 3}
-  celestialMax: 1000
+  celestialMax: 100
   xMax: 2000
   yMax: 2000
   zMax: 2000
   celestialObjs: []
+  resources: 0
   gameOver: 0
   gameOverCanvas: {fileID: 1755367086}
 --- !u!4 &174594020
@@ -630,11 +630,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869448406}
   m_CullTransparentMesh: 1
---- !u!1 &901869350 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1140025910357742, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
-  m_PrefabInstance: {fileID: 1142721726}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &911185513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4115159995193922, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}

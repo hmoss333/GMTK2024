@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FLFlight
-{
+
     /// <summary>
     /// Ties all the primary ship components together.
     /// </summary>
@@ -39,4 +38,3 @@ namespace FLFlight
                 PlayerShip = this;
         }
     }
-}

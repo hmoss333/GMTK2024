@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     readonly float G = 10000f;
-    [SerializeField] GameObject ship;
+    public Ship ship { get; private set; }
     [SerializeField] GameObject celestialPrefab;
     float storedScale = 0f;
     [SerializeField] int celestialMax;
@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     [SerializeField] int yMax;
     [SerializeField] int zMax;
     [SerializeField] List<GameObject> celestialObjs;
+
+    [SerializeField] float resources;
 
     public bool gameOver = false;
     [SerializeField] GameObject gameOverCanvas;
@@ -27,7 +29,8 @@ public class GameController : MonoBehaviour
         else
             Destroy(this);
 
-        gameOver = false;        
+        gameOver = false;
+        ship = FindObjectOfType<Ship>();
         GenerateGalaxy();
     }
 
@@ -54,7 +57,7 @@ public class GameController : MonoBehaviour
             {
                 float checkDist = Vector3.Distance(randPos, celestial.transform.position);
                 float checkOrigin = Vector3.Distance(randPos, Vector3.zero);
-                if ((checkDist <= 10f && checkOrigin <= 10) || (randScale <= storedScale + 10f && randScale >= storedScale - 10f))
+                if ((checkDist <= 10f && checkOrigin <= 100) || (randScale <= storedScale + 10f && randScale >= storedScale - 10f))
                 {
                     i--;
                     placed = false;
@@ -66,6 +69,7 @@ public class GameController : MonoBehaviour
             {
                 print("Added celestial body");
                 GameObject tempCelestial = Instantiate(celestialPrefab, randPos, Quaternion.identity);
+                tempCelestial.name += $"({i})";
                 tempCelestial.transform.localScale = Vector3.one * randScale * 500f;
                 tempCelestial.GetComponent<Rigidbody>().mass = randScale;
                 celestialObjs.Add(tempCelestial);
@@ -127,6 +131,11 @@ public class GameController : MonoBehaviour
             //    }
             //}
         }
+    }
+
+    public void UpdateResources()
+    {
+        resources++;
     }
 
     public void GameOver()
