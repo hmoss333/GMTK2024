@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace FLFlight
 {
@@ -39,6 +40,7 @@ namespace FLFlight
 
         [SerializeField] float fuel = 100f;
         [SerializeField] float fuelDrain = 1.5f;
+        [SerializeField] Image fuleUI;
 
         private void Update()
         {
@@ -46,6 +48,7 @@ namespace FLFlight
             {
                 fuel -= Mathf.Abs(fuelDrain * (throttle + 1) * Time.deltaTime);
                 if (fuel <= 0) { fuel = 0; GameController.instance.GameOver(); }
+                fuleUI.fillAmount = fuel / 100f;
 
                 strafe = Input.GetAxis("Horizontal");
 

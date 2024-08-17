@@ -6,9 +6,10 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
-    readonly float G = 1000f;
+    readonly float G = 10000f;
     [SerializeField] GameObject ship;
     [SerializeField] GameObject celestialPrefab;
+    float storedScale = 0f;
     [SerializeField] int celestialMax;
     [SerializeField] int xMax;
     [SerializeField] int yMax;
@@ -46,21 +47,29 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < celestialMax; i++)
         {
-            Vector3 randPos = new Vector3(Random.Range(-xMax, xMax), Random.Range(-yMax, yMax), Random.Range(50f, zMax));
+            Vector3 randPos = new Vector3(Random.Range(-xMax, xMax), Random.Range(-yMax, yMax), Random.Range(-zMax, zMax));
+            float randScale = Random.Range(1f, 40f);
+            bool placed = true;
             foreach (GameObject celestial in celestialObjs)
             {
                 float checkDist = Vector3.Distance(randPos, celestial.transform.position);
-                if (checkDist <= 5f)
+                float checkOrigin = Vector3.Distance(randPos, Vector3.zero);
+                if ((checkDist <= 10f && checkOrigin <= 10) || (randScale <= storedScale + 10f && randScale >= storedScale - 10f))
                 {
                     i--;
+                    placed = false;
+                    print("Repeated position");
                     break;
                 }
             }
-            GameObject tempCelestial = Instantiate(celestialPrefab, randPos, Quaternion.identity);
-            float randScale = Random.Range(1, 30);
-            tempCelestial.transform.localScale = Vector3.one * randScale * 75f;
-            tempCelestial.GetComponent<Rigidbody>().mass = randScale;
-            celestialObjs.Add(tempCelestial);
+            if (placed)
+            {
+                print("Added celestial body");
+                GameObject tempCelestial = Instantiate(celestialPrefab, randPos, Quaternion.identity);
+                tempCelestial.transform.localScale = Vector3.one * randScale * 500f;
+                tempCelestial.GetComponent<Rigidbody>().mass = randScale;
+                celestialObjs.Add(tempCelestial);
+            }
         }
     }
 
