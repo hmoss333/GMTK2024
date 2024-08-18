@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int yMax;
     [SerializeField] int zMax;
     [SerializeField] List<GameObject> celestialObjs;
+    [SerializeField] GameObject blackHoleMonster;
 
     [SerializeField] float resources;
 
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
 
         gameOver = false;
         ship = FindObjectOfType<Ship>();
+        blackHoleMonster.transform.localScale = Vector3.zero;
+        blackHoleMonster.SetActive(false);
         GenerateGalaxy();
     }
 
@@ -39,6 +42,16 @@ public class GameController : MonoBehaviour
     {
         gameOverCanvas.SetActive(gameOver);
         Cursor.visible = gameOver;
+
+        if (resources >= 10000f)
+        {
+            blackHoleMonster.SetActive(true);
+            blackHoleMonster.transform.localScale += Vector3.one * Time.deltaTime * 100f;
+            if (blackHoleMonster.transform.localScale.x >= 2500f)
+            {
+                GameOver();
+            }
+        }
     }
 
     // Update is called once per frame
