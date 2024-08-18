@@ -85,7 +85,7 @@ public class ShipInput : MonoBehaviour
 
     private void Update()
     {
-        if (!GameController.instance.gameOver)
+        if (!GameController.instance.gameOver && !GameController.instance.instructions)
         {
             GetComponent<Rigidbody>().mass = transform.localScale.x * 5;
 
@@ -96,7 +96,9 @@ public class ShipInput : MonoBehaviour
                 laserSource.Stop();
                 GameController.instance.GameOver(); }
             fuleUI.fillAmount = fuel / 100f;
-            laserUI.fillAmount = laser / 20f;           
+            laserUI.fillAmount = laser / 20f;
+
+            fuleUI.sprite = throttle > 0 ? usingBackground : defaultBackground;
 
             strafe = Input.GetAxis("Horizontal");
 

@@ -17,14 +17,22 @@ public class GameController : MonoBehaviour
     [SerializeField] int zMax;
     [SerializeField] List<GameObject> celestialObjs;
     [SerializeField] List<GameObject> minableObjs;
+
+    [Header("Exit Values")]
     [SerializeField] GameObject exit;
     bool exitPlaced;
+
+    [Header("Monster Event Object")]
     [SerializeField] GameObject blackHoleMonster;
 
+    [Header("Resource Value")]
     [SerializeField] float resources;
 
-    public bool gameOver = false;
+    [Header("Canvas Objects")]
+    [SerializeField] GameObject instructionCanvas;
+    public bool instructions { get; private set; }
     [SerializeField] GameObject gameOverCanvas;
+    public bool gameOver = false;
 
     Coroutine sceneChangeRoutine;
 
@@ -45,12 +53,17 @@ public class GameController : MonoBehaviour
         gameOver = false;
         blackHoleMonster.transform.localScale = Vector3.zero;
         blackHoleMonster.SetActive(false);
+
+        int toggleInstruction = PlayerPrefs.GetInt("instructionCanvas", 0);
+        instructionCanvas.SetActive(toggleInstruction == 0);
+
         FadeController.instance.StartFade(0f, 1f);
     }
 
     private void Update()
     {
         gameOverCanvas.SetActive(gameOver);
+        instructions = instructionCanvas.activeSelf;
         Cursor.visible = gameOver;
 
         if (resources >= 6000 && !exitPlaced)
@@ -187,6 +200,12 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Game over");
         gameOver = true;
+    }
+
+    public void StartGame()
+    {
+        PlayerPrefs.SetInt("instructionCanvas", 1);
+        instructionCanvas.SetActive(false);
     }
 
     public void MainMenu()
