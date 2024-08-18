@@ -262,6 +262,8 @@ MonoBehaviour:
   yMax: 3000
   zMax: 4000
   celestialObjs: []
+  minableObjs: []
+  exit: {fileID: 2693828298376269272, guid: 0d9767bdaebd444c48d7fde69112e53f, type: 3}
   blackHoleMonster: {fileID: 968936875}
   resources: 0
   gameOver: 0
@@ -1237,7 +1239,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1042620048
@@ -1359,7 +1361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114085622575265250, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
       propertyPath: forceMultiplier
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114449331134152560, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
       propertyPath: laser
@@ -1405,6 +1407,10 @@ PrefabInstance:
       propertyPath: defaultBackground
       value: 
       objectReference: {fileID: 21300000, guid: 13ec8011789fd44e7b149b7ee9b34623, type: 3}
+    - target: {fileID: 1285218929285259264, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
 --- !u!1 &1471309678
@@ -2004,7 +2010,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1877495839

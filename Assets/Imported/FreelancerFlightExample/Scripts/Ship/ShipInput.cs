@@ -87,6 +87,8 @@ public class ShipInput : MonoBehaviour
     {
         if (!GameController.instance.gameOver)
         {
+            GetComponent<Rigidbody>().mass = transform.localScale.x * 5;
+
             fuel -= Mathf.Abs(fuelDrain * (throttle + 1) * Time.deltaTime);
             if (fuel <= 0) {
                 fuel = 0;
@@ -94,7 +96,7 @@ public class ShipInput : MonoBehaviour
                 laserSource.Stop();
                 GameController.instance.GameOver(); }
             fuleUI.fillAmount = fuel / 100f;
-            laserUI.fillAmount = laser / 20f;
+            laserUI.fillAmount = laser / 20f;           
 
             strafe = Input.GetAxis("Horizontal");
 
@@ -231,16 +233,23 @@ public class ShipInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Play explosion effect
-        throttleSource.Stop();
-        laserSource.Stop();
+        if (collision.transform.GetComponent<Rigidbody>().mass >= GetComponent<Rigidbody>().mass)
+        {
+            //Play explosion effect
+            throttleSource.Stop();
+            laserSource.Stop();
 
-        explosionSource.clip = explosionClip;
-        explosionSource.volume = 1f;
-        explosionSource.loop = false;
-        explosionSource.Play();
+            explosionSource.clip = explosionClip;
+            explosionSource.volume = 1f;
+            explosionSource.loop = false;
+            explosionSource.Play();
 
-        GameController.instance.GameOver();
+            GameController.instance.GameOver();
+        }
+        else
+        {
+            collision.transform.GetComponent<CelestialBody>().depleated = true;
+        }
     }
 }
 

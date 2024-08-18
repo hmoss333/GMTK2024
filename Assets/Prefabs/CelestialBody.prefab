@@ -132,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resources: 0
+  depleated: 0
+  minable: 0
   drainEffect: {fileID: 1833082074682257947}
   blackHolePrefab: {fileID: 5586754514881324188}
   destroyClip: {fileID: 8300000, guid: f01c623f724825e44a923d1ae50256f2, type: 3}

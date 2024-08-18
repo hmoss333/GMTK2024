@@ -200,6 +200,8 @@ MonoBehaviour:
     m_Bits: 64
   laserClip: {fileID: 8300000, guid: e96a84f66ed7d4eaabbfb352f63add7e, type: 3}
   laserSource: {fileID: 1374868760580596667}
+  resources: 0
+  largeTimer: 20
   defaultBackground: {fileID: 0}
   usingBackground: {fileID: 0}
   explosionClip: {fileID: 8300000, guid: fc96116dc3c141440aabb5605744fea2, type: 3}

@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     [SerializeField] int yMax;
     [SerializeField] int zMax;
     [SerializeField] List<GameObject> celestialObjs;
+    [SerializeField] List<GameObject> minableObjs;
+    [SerializeField] GameObject exit;
+    bool exitPlaced;
     [SerializeField] GameObject blackHoleMonster;
 
     [SerializeField] float resources;
@@ -50,7 +53,19 @@ public class GameController : MonoBehaviour
         gameOverCanvas.SetActive(gameOver);
         Cursor.visible = gameOver;
 
-        if (resources >= 10000f)
+        if (resources >= 6000 && !exitPlaced)
+        {
+            float exitX = xMax / 2f;
+            float exitY = yMax / 2f;
+            float exitZ = zMax / 2f;
+            Vector3 randPos = new Vector3(Random.Range(-exitX, exitX), Random.Range(-exitY, exitY), Random.Range(-exitZ, exitZ));
+
+            print("Added exit point");
+            GameObject exitPoint = Instantiate(exit, randPos, Quaternion.identity);
+            exitPlaced = true;
+        }
+
+        if (Time.timeSinceLevelLoad >= 500f)
         {
             blackHoleMonster.SetActive(true);
             blackHoleMonster.transform.localScale += Vector3.one * Time.deltaTime * 100f;
@@ -71,14 +86,14 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < celestialMax; i++)
         {
-            Vector3 randPos = new Vector3(Random.Range(-xMax, xMax), Random.Range(-yMax, yMax), Random.Range(-zMax, zMax));
-            float randScale = Random.Range(1f, 40f);
+            Vector3 randPos = new Vector3(Random.Range(-xMax, xMax), Random.Range(-yMax, yMax), Random.Range(500f, zMax));
+            float randScale = Random.Range(1f, 75f);
             bool placed = true;
             foreach (GameObject celestial in celestialObjs)
             {
                 float checkDist = Vector3.Distance(randPos, celestial.transform.position);
                 float checkOrigin = Vector3.Distance(randPos, Vector3.zero);
-                if ((checkDist <= 10f && checkOrigin <= 100) || (randScale <= storedScale + 10f && randScale >= storedScale - 10f))
+                if ((checkDist <= 10f && checkOrigin <= 1000) && (randScale <= storedScale + 10f && randScale >= storedScale - 10f))
                 {
                     i--;
                     placed = false;
@@ -93,6 +108,15 @@ public class GameController : MonoBehaviour
                 tempCelestial.name += $"({i})";
                 tempCelestial.transform.localScale = Vector3.one * randScale * 500f;
                 tempCelestial.GetComponent<Rigidbody>().mass = randScale;
+                int mineCheck = Random.Range(0, 100);
+                if (mineCheck % 2 == 0 && minableObjs.Count < celestialMax / 5f)
+                {
+                    tempCelestial.GetComponent<CelestialBody>().minable = true;
+                    Material tempMat = tempCelestial.GetComponent<MeshRenderer>().materials[0];
+                    tempMat.color = Color.yellow;
+                    tempCelestial.GetComponent<MeshRenderer>().materials[0] = tempMat;
+                    minableObjs.Add(tempCelestial);
+                }
                 celestialObjs.Add(tempCelestial);
             }
         }
@@ -167,18 +191,23 @@ public class GameController : MonoBehaviour
 
     public void MainMenu()
     {
-        if (sceneChangeRoutine == null)
-            sceneChangeRoutine = StartCoroutine(SceneChange());
+        ChangeScene("MainMenu");
     }
 
-    IEnumerator SceneChange()
+    public void ChangeScene(string sceneToLoad)
+    {
+        if (sceneChangeRoutine == null)
+            sceneChangeRoutine = StartCoroutine(SceneChange(sceneToLoad));
+    }
+
+    IEnumerator SceneChange(string sceneToLoad)
     {
         FadeController.instance.StartFade(1f, 1f);
 
         while (FadeController.instance.isFading)
             yield return null;
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(sceneToLoad);
 
         sceneChangeRoutine = null;
     }
