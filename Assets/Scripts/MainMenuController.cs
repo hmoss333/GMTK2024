@@ -29,6 +29,8 @@ public class MainMenuController : MonoBehaviour
             instance = this;
         else
             Destroy(this);
+
+        Cursor.visible = false;
     }
 
     private void Start()
