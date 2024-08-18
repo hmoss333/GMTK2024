@@ -43,6 +43,8 @@ public class ShipInput : MonoBehaviour
     [SerializeField] float fuel = 100f;
     [SerializeField] float fuelDrain = 1.5f;
     [SerializeField] Image fuleUI;
+    [SerializeField] AudioClip throttleClip;
+    [SerializeField] AudioSource throttleSource;
 
     [Header("Laser Values")]
     [SerializeField] float laser = 100f;
@@ -51,8 +53,14 @@ public class ShipInput : MonoBehaviour
     [SerializeField] LineRenderer Line;
     [SerializeField] LayerMask layer;
     bool recharging = false;
+    [SerializeField] AudioClip laserClip;
+    [SerializeField] AudioSource laserSource;
 
     [SerializeField] Sprite defaultBackground, usingBackground;
+
+    [Header("Explosion Values")]
+    [SerializeField] AudioClip explosionClip;
+    [SerializeField] AudioSource explosionSource;
 
 
     private void Start()
@@ -65,6 +73,14 @@ public class ShipInput : MonoBehaviour
         Line.startWidth = 0.3f;
         Line.endWidth = 0.3f;
         Line.positionCount = 0;
+
+        //Audio setup
+        throttleSource.clip = throttleClip;
+        throttleSource.volume = 0.1f;
+        throttleSource.loop = true;
+        throttleSource.Play();
+        laserSource.clip = laserClip;
+        laserSource.loop = true;
     }
 
     private void Update()
@@ -72,7 +88,11 @@ public class ShipInput : MonoBehaviour
         if (!GameController.instance.gameOver)
         {
             fuel -= Mathf.Abs(fuelDrain * (throttle + 1) * Time.deltaTime);
-            if (fuel <= 0) { fuel = 0; GameController.instance.GameOver(); }
+            if (fuel <= 0) {
+                fuel = 0;
+                throttleSource.Stop();
+                laserSource.Stop();
+                GameController.instance.GameOver(); }
             fuleUI.fillAmount = fuel / 100f;
             laserUI.fillAmount = laser / 20f;
 
@@ -86,6 +106,9 @@ public class ShipInput : MonoBehaviour
 
             if (Input.GetMouseButton(0) && !recharging)
             {
+                if (!laserSource.isPlaying)
+                    laserSource.Play();
+
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 750f, layer))
                 {
@@ -102,6 +125,8 @@ public class ShipInput : MonoBehaviour
             }
             else
             {
+                laserSource.Stop();
+
                 laserUI.sprite = defaultBackground;
                 Line.positionCount = 0;
                 laser += laserDrain * 5f * Time.deltaTime;
@@ -207,6 +232,14 @@ public class ShipInput : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Play explosion effect
+        throttleSource.Stop();
+        laserSource.Stop();
+
+        explosionSource.clip = explosionClip;
+        explosionSource.volume = 1f;
+        explosionSource.loop = false;
+        explosionSource.Play();
+
         GameController.instance.GameOver();
     }
 }
