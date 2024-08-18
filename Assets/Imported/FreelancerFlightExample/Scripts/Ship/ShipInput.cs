@@ -38,13 +38,21 @@ public class ShipInput : MonoBehaviour
     public float Strafe { get { return strafe; } }
     public float Throttle { get { return throttle; } }
 
+
+    [Header("Fuel Values")]
     [SerializeField] float fuel = 100f;
     [SerializeField] float fuelDrain = 1.5f;
     [SerializeField] Image fuleUI;
 
+    [Header("Laser Values")]
+    [SerializeField] float laser = 100f;
+    [SerializeField] float laserDrain = 1.5f;
+    [SerializeField] Image laserUI;
     [SerializeField] LineRenderer Line;
     [SerializeField] LayerMask layer;
-    bool usinglaser;
+    bool recharging = false;
+
+    [SerializeField] Sprite defaultBackground, usingBackground;
 
 
     private void Start()
@@ -63,10 +71,10 @@ public class ShipInput : MonoBehaviour
     {
         if (!GameController.instance.gameOver)
         {
-            float drainVal = usinglaser ? fuelDrain + 1.5f : fuelDrain;
-            fuel -= Mathf.Abs(drainVal * (throttle + 1) * Time.deltaTime);
+            fuel -= Mathf.Abs(fuelDrain * (throttle + 1) * Time.deltaTime);
             if (fuel <= 0) { fuel = 0; GameController.instance.GameOver(); }
             fuleUI.fillAmount = fuel / 100f;
+            laserUI.fillAmount = laser / 20f;
 
             strafe = Input.GetAxis("Horizontal");
 
@@ -76,7 +84,7 @@ public class ShipInput : MonoBehaviour
             UpdateKeyboardThrottle(KeyCode.W, KeyCode.S);
 
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !recharging)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 750f, layer))
@@ -84,13 +92,20 @@ public class ShipInput : MonoBehaviour
                     hit.transform.GetComponent<CelestialBody>().DrainResources();
                 }
 
+                laserUI.sprite = usingBackground;
                 Line.positionCount = 2;
                 Line.SetPosition(0, transform.position);
                 Line.SetPosition(1, transform.forward * 750f + transform.position);
+
+                laser -= Mathf.Abs(laserDrain * Time.deltaTime);
+                if (laser <= 0) { laser = 0; recharging = true; }
             }
             else
             {
+                laserUI.sprite = defaultBackground;
                 Line.positionCount = 0;
+                laser += laserDrain * 5f * Time.deltaTime;
+                if (laser >= 20f) { laser = 20f; recharging = false; }
             }
         }
     }
