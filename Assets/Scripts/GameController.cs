@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
     public bool gameOver = false;
     [SerializeField] GameObject gameOverCanvas;
 
+    Coroutine sceneChangeRoutine;
+
 
     private void Awake()
     {
@@ -31,11 +33,16 @@ public class GameController : MonoBehaviour
         else
             Destroy(this);
 
-        gameOver = false;
         ship = FindObjectOfType<Ship>();
+        GenerateGalaxy();
+    }
+
+    private void Start()
+    {
+        gameOver = false;
         blackHoleMonster.transform.localScale = Vector3.zero;
         blackHoleMonster.SetActive(false);
-        GenerateGalaxy();
+        FadeController.instance.StartFade(0f, 1f);
     }
 
     private void Update()
@@ -160,6 +167,19 @@ public class GameController : MonoBehaviour
 
     public void MainMenu()
     {
+        if (sceneChangeRoutine == null)
+            sceneChangeRoutine = StartCoroutine(SceneChange());
+    }
+
+    IEnumerator SceneChange()
+    {
+        FadeController.instance.StartFade(1f, 1f);
+
+        while (FadeController.instance.isFading)
+            yield return null;
+
         SceneManager.LoadScene("MainMenu");
+
+        sceneChangeRoutine = null;
     }
 }

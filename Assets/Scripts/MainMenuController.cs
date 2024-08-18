@@ -16,11 +16,13 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] MainMenuElement[] menuElements;
     public MainMenuElement currentElement { get; private set; }
+    [SerializeField] Transform loadGameCam;
     [SerializeField] float camSpeed;
     private int index;
     [SerializeField] AudioSource audioSource;
     [SerializeField] float maxAudioVolume;
     string sceneToLoad;
+    bool startingGame = false;
 
 
     private void Awake()
@@ -31,6 +33,7 @@ public class MainMenuController : MonoBehaviour
             Destroy(this);
 
         Cursor.visible = false;
+        startingGame = false;
     }
 
     private void Start()
@@ -38,32 +41,35 @@ public class MainMenuController : MonoBehaviour
         index = 0;
         currentElement = menuElements[index];
 
-        //FadeController.instance.StartFade(0f, 1f);
+        FadeController.instance.StartFade(0f, 1f);
     }
 
     private void Update()
     {
-        Vector2 inputVal = InputController.instance.inputMaster.Player.Move.ReadValue<Vector2>();
-        bool inputCheck = InputController.instance.inputMaster.Player.Move.WasPressedThisFrame();
-        if (Mathf.RoundToInt(inputVal.x) < 0 && inputCheck)
+        if (!startingGame)
         {
-            index--;
-            if (index < 0)
-                index = menuElements.Length - 1;
-        }
-        else if (Mathf.RoundToInt(inputVal.x) > 0 && inputCheck)
-        {
-            index++;
-            if (index > menuElements.Length - 1)
-                index = 0;
-        }
+            Vector2 inputVal = InputController.instance.inputMaster.Player.Move.ReadValue<Vector2>();
+            bool inputCheck = InputController.instance.inputMaster.Player.Move.WasPressedThisFrame();
+            if (Mathf.RoundToInt(inputVal.x) < 0 && inputCheck)
+            {
+                index--;
+                if (index < 0)
+                    index = menuElements.Length - 1;
+            }
+            else if (Mathf.RoundToInt(inputVal.x) > 0 && inputCheck)
+            {
+                index++;
+                if (index > menuElements.Length - 1)
+                    index = 0;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //audioSource.Stop();
-            //audioSource.clip = currentElement.clip;
-            //audioSource.Play();
-            currentElement.onClick();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //audioSource.Stop();
+                //audioSource.clip = currentElement.clip;
+                //audioSource.Play();
+                currentElement.onClick();
+            }
         }
     }
 
@@ -71,13 +77,23 @@ public class MainMenuController : MonoBehaviour
     {
         currentElement = menuElements[index];
 
-        Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, currentElement.pos.rotation, camSpeed * Time.deltaTime);
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, currentElement.pos.position, camSpeed * Time.deltaTime);
+        if (startingGame)
+        {
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, loadGameCam.localRotation, camSpeed * Time.deltaTime);
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, loadGameCam.position, camSpeed * Time.deltaTime);
+        }
+        else
+        {
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation, currentElement.pos.rotation, camSpeed * Time.deltaTime);
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, currentElement.pos.position, camSpeed * Time.deltaTime);
+        }
     }
 
     public void NewGameButton()
     {
-        SceneManager.LoadScene("Flight");
+        startingGame = true;
+
+        StartCoroutine(StartGame());
     }
 
     public void QuitGameButton()
@@ -106,6 +122,16 @@ public class MainMenuController : MonoBehaviour
             audioSource.volume = delta;
             yield return null;
         }
+    }
+
+    IEnumerator StartGame()
+    {
+        FadeController.instance.StartFade(1f, 1f);
+
+        while (FadeController.instance.isFading)
+            yield return null;
+
+        SceneManager.LoadScene("Flight");
     }
 }
 
