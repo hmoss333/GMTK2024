@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
     {
         gameOverCanvas.SetActive(gameOver);
         instructions = instructionCanvas.activeSelf;
-        Cursor.visible = gameOver;
+        Cursor.visible = gameOver || instructions;
 
         if (resources >= 6000 && !exitPlaced)
         {
