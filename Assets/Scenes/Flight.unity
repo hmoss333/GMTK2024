@@ -614,8 +614,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
-  m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
+  m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -757,8 +757,8 @@ MonoBehaviour:
     Collect
     the resources to generate a wormhole and get home!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
-  m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
+  m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1056,8 +1056,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: How to Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
-  m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
+  m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1905,7 +1905,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Game Over
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1042620048
@@ -2676,7 +2676,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Retry
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2740,7 +2740,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1877495839
