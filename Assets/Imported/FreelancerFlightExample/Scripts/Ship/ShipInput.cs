@@ -85,7 +85,7 @@ public class ShipInput : MonoBehaviour
 
     private void Update()
     {
-        if (!GameController.instance.gameOver && !GameController.instance.instructions)
+        if (!GameController.instance.gameOver && !GameController.instance.instructions && !GameController.instance.paused)
         {
             GetComponent<Rigidbody>().mass = transform.localScale.x * 5;
 

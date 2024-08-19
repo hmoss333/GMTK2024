@@ -32,7 +32,9 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject instructionCanvas;
     public bool instructions { get; private set; }
     [SerializeField] GameObject gameOverCanvas;
-    public bool gameOver = false;
+    public bool gameOver { get; private set; }
+    [SerializeField] GameObject pauseCanvas;
+    public bool paused { get; private set;}
 
     Coroutine sceneChangeRoutine;
 
@@ -51,6 +53,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         gameOver = false;
+        paused = false;
         blackHoleMonster.transform.localScale = Vector3.zero;
         blackHoleMonster.SetActive(false);
 
@@ -63,8 +66,14 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         gameOverCanvas.SetActive(gameOver);
+        pauseCanvas.SetActive(paused);
         instructions = instructionCanvas.activeSelf;
-        Cursor.visible = gameOver || instructions;
+        Cursor.visible = gameOver || instructions || paused;
+
+        if (!gameOver && !instructions && Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
 
         if (resources >= 6000 && !exitPlaced)
         {
@@ -208,6 +217,12 @@ public class GameController : MonoBehaviour
         instructionCanvas.SetActive(false);
     }
 
+    public void PauseGame()
+    {
+        paused = !paused;
+        Time.timeScale = paused ? 0f : 1f;   
+    }
+
     public void MainMenu()
     {
         ChangeScene("MainMenu");
@@ -221,6 +236,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator SceneChange(string sceneToLoad)
     {
+        Time.timeScale = 1f;
         FadeController.instance.StartFade(1f, 1f);
 
         while (FadeController.instance.isFading)

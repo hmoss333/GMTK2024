@@ -41,6 +41,7 @@ public class MainMenuController : MonoBehaviour
         index = 0;
         currentElement = menuElements[index];
         PlayerPrefs.SetInt("instructionCanvas", 0);
+        Time.timeScale = 1f;
 
         FadeController.instance.StartFade(0f, 1f);
     }
