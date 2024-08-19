@@ -36,6 +36,7 @@ public class CelestialBody : MonoBehaviour
         }
         else if (depleated)
         {
+            blackHolePrefab.SetActive(true);
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 2.5f * Time.deltaTime);
             if (transform.localScale.x <= startScale.x * 0.33f)
             {
@@ -59,7 +60,7 @@ public class CelestialBody : MonoBehaviour
 
                 if (!destroySource.isPlaying)
                     destroySource.Play();
-                blackHolePrefab.SetActive(true);
+                //blackHolePrefab.SetActive(true);
             }
         }
     }
