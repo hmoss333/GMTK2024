@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
             PauseGame();
         }
 
-        if (resources >= 6000 && !exitPlaced)
+        if (resources >= 5000 && !exitPlaced)
         {
             float exitX = xMax / 2f;
             float exitY = yMax / 2f;
@@ -87,14 +87,14 @@ public class GameController : MonoBehaviour
             exitPlaced = true;
         }
 
-        if (Time.timeSinceLevelLoad >= 500f)
+        if (Time.timeSinceLevelLoad >= 400f)
         {
             blackHoleMonster.SetActive(true);
             blackHoleMonster.transform.localScale += Vector3.one * Time.deltaTime * 100f;
-            if (blackHoleMonster.transform.localScale.x >= 2500f)
-            {
-                GameOver();
-            }
+            //if (blackHoleMonster.transform.localScale.x >= 2500f)
+            //{
+            //    GameOver();
+            //}
         }
     }
 
