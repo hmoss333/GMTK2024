@@ -237,6 +237,7 @@ public class ShipInput : MonoBehaviour
     {
         if (collision.transform.GetComponent<Rigidbody>().mass >= GetComponent<Rigidbody>().mass)
         {
+            Debug.Log($"Collided with {collision.transform.name}");
             //Play explosion effect
             throttleSource.Stop();
             laserSource.Stop();

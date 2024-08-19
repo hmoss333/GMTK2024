@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 
     readonly float G = 10000f;
     public Ship ship { get; private set; }
-    [SerializeField] GameObject celestialPrefab;
+    [SerializeField] GameObject[] celestialPrefabs;
     float storedScale = 0f;
     [SerializeField] int celestialMax;
     [SerializeField] int xMax;
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
             PauseGame();
         }
 
-        if (resources >= 5000 && !exitPlaced)
+        if (resources >= 900 && !exitPlaced)
         {
             float exitX = xMax / 2f;
             float exitY = yMax / 2f;
@@ -91,10 +91,6 @@ public class GameController : MonoBehaviour
         {
             blackHoleMonster.SetActive(true);
             blackHoleMonster.transform.localScale += Vector3.one * Time.deltaTime * 100f;
-            //if (blackHoleMonster.transform.localScale.x >= 2500f)
-            //{
-            //    GameOver();
-            //}
         }
     }
 
@@ -109,7 +105,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < celestialMax; i++)
         {
             Vector3 randPos = new Vector3(Random.Range(-xMax, xMax), Random.Range(-yMax, yMax), Random.Range(500f, zMax));
-            float randScale = Random.Range(1f, 75f);
+            float randScale = Random.Range(1000f, 2500f);
             bool placed = true;
             foreach (GameObject celestial in celestialObjs)
             {
@@ -126,19 +122,11 @@ public class GameController : MonoBehaviour
             if (placed)
             {
                 print("Added celestial body");
-                GameObject tempCelestial = Instantiate(celestialPrefab, randPos, Quaternion.identity);
+                int randPrefab = Random.Range(0, celestialPrefabs.Length - 1);
+                GameObject tempCelestial = Instantiate(celestialPrefabs[randPrefab], randPos, Random.rotation);
                 tempCelestial.name += $"({i})";
-                tempCelestial.transform.localScale = Vector3.one * randScale * 500f;
-                tempCelestial.GetComponent<Rigidbody>().mass = randScale;
-                int mineCheck = Random.Range(0, 100);
-                if (mineCheck % 2 == 0 && minableObjs.Count < celestialMax / 5f)
-                {
-                    tempCelestial.GetComponent<CelestialBody>().minable = true;
-                    Material tempMat = tempCelestial.GetComponent<MeshRenderer>().materials[0];
-                    tempMat.color = Color.yellow;
-                    tempCelestial.GetComponent<MeshRenderer>().materials[0] = tempMat;
-                    minableObjs.Add(tempCelestial);
-                }
+                tempCelestial.transform.localScale = Vector3.one * randScale;
+                tempCelestial.GetComponent<Rigidbody>().mass = randScale;              
                 celestialObjs.Add(tempCelestial);
             }
         }

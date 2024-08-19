@@ -7,7 +7,7 @@ public class CelestialBody : MonoBehaviour
 {
     public float resources;
     public bool depleated = false;
-    public bool minable = false;
+    //public bool minable = false;
     Vector3 startScale;
     [SerializeField] ParticleSystem drainEffect;
     [SerializeField] GameObject blackHolePrefab;
@@ -29,15 +29,15 @@ public class CelestialBody : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!depleated && minable)
+        if (!depleated)
         {
             transform.localScale = new Vector3(resources, resources, resources);
-            GetComponent<Rigidbody>().mass = resources / 500f;
+            GetComponent<Rigidbody>().mass = resources / 30f;
         }
         else if (depleated)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 1000f, 2.5f * Time.deltaTime);
-            if (transform.localScale.x <= 2000f)
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 2.5f * Time.deltaTime);
+            if (transform.localScale.x <= startScale.x * 0.33f)
             {
                 this.gameObject.SetActive(false);
             }
@@ -46,14 +46,14 @@ public class CelestialBody : MonoBehaviour
 
     public void DrainResources()
     {
-        if (!depleated && minable)
+        if (!depleated)// && minable)
         {
             print($"Draining from {name}");
             drainEffect.Emit(10);
-            resources -= 15f;//35;
+            resources -= 10f;//35;
             GameController.instance.UpdateResources();
 
-            if (transform.localScale.x <= 5000.0f)
+            if (transform.localScale.x <= startScale.x * 0.66f)
             {
                 depleated = true;
 

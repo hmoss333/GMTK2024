@@ -335,7 +335,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05350984cfdb9440bac8d80b55101277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  celestialPrefab: {fileID: 5675092262919765063, guid: 65239a34498454309aba4454706a2022, type: 3}
+  celestialPrefabs:
+  - {fileID: 6281343529612458172, guid: 5348041ccebb8497a9ed2884499dbe29, type: 3}
+  - {fileID: 638788129261360555, guid: db17bf6876b3b4bba9748d78e69f7050, type: 3}
+  - {fileID: 2138073625891392114, guid: 022bfd730ee1745efaca0f93f4c71440, type: 3}
+  - {fileID: 2888106740956639086, guid: a6fdb4416b8d84d099680f43b8eb1890, type: 3}
+  - {fileID: 5656524636957851654, guid: cc33194dbde35495b9ed75584d21afff, type: 3}
+  - {fileID: 5408207176154486078, guid: 74c1e67ce06cb4f98a39ecae2ce93eac, type: 3}
+  - {fileID: 2385632756301542735, guid: 4316ed26c06924718a6b69b5102026ff, type: 3}
   celestialMax: 500
   xMax: 3000
   yMax: 3000
@@ -881,7 +888,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 25}
-  m_SizeDelta: {x: -30, y: 150}
+  m_SizeDelta: {x: -50, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645861956
 MonoBehaviour:
@@ -903,15 +910,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Navigate by moving your mouse and hold down the button to fire your energy-absorbing
-    laser.
-
-
-    Avoid colliding with any space debris as the damage will be catastrophic.
-
-
-    Collect
-    the resources to generate a wormhole and get home!'
+  m_text: "You have been stranded in a bizarre pocket dimension with floating objects
+    of all sizes. \n\nLeft-click to use your ship\u2019s absorption laser to collect
+    materials and create a wormhole home. \n\nNavigate with your mouse and avoid
+    collisions\u2014damage will be catastrophic!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
@@ -920,8 +922,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -938,7 +940,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.15
+  m_fontSize: 8.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -948,8 +950,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: 20
+  m_wordSpacing: 20
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -1488,8 +1490,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2223,7 +2225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968936875}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6000}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2465,14 +2467,14 @@ MonoBehaviour:
   m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
-  m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2528,7 +2530,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1042620048
@@ -2608,6 +2610,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1140025910357742, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1140025910357742, guid: 118efdd877e08f94db8b8ba4780bf098, type: 3}
       propertyPath: m_TagString
       value: Celestial
@@ -3301,8 +3307,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3503,10 +3509,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retry
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
-  m_sharedMaterial: {fileID: -2588166593924423817, guid: 8606c1e60b17341c994ab89755b18261, type: 2}
+  m_sharedMaterial: {fileID: -2588166593924423817, guid: 878f6963db0ff4db882f57d7bdb26a5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3530,10 +3536,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 21.85
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -3566,10 +3572,10 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 8.091919, y: 0, z: 10.314148, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1877495839
